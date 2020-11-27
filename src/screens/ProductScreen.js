@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Row , Col, Image, ListGroup, Card, Button } from 'react-bootstrap'
+import { Row , Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from  '../products'
 import  { useDispatch, useSelector } from 'react-redux'
 import { listProductDetail } from '../actions/productActions'
 import Loader from '../components/Loader'
@@ -11,7 +10,13 @@ import Message from '../components/Message'
 
 
 
-const ProductScreen = ({match}) => {
+const ProductScreen = ({history, match}) => {
+
+ const [qty, setQty] = useState(1)
+
+ const addToCartHandler = () => {
+     history.push(`/cart/${match.params.id}?qty=${qty}`)
+ }
     
 //redux hooks
 const dispatch = useDispatch()
@@ -92,6 +97,7 @@ useEffect(() => {
                        <Col>
                            {productDetail.countInStock > 0 ?  'In stock' : 'Out of Stock'}
                        </Col>
+
                    </Row>
                     </ListGroup.Item>
 
@@ -103,6 +109,7 @@ useEffect(() => {
                        className='btn-block' 
                        type='button'
                         disabled={productDetail.countInStock === 0}
+                        onClick={addToCartHandler}
                         >
                            Add To Cart
                        </Button>
