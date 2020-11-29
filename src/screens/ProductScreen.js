@@ -10,14 +10,11 @@ import Message from '../components/Message'
 
 
 
-const ProductScreen = ({history, match}) => {
+const ProductScreen = ({ history, match}) => {
 
  const [qty, setQty] = useState(1)
 
- const addToCartHandler = () => {
-     history.push(`/cart/${match.params.id}?qty=${qty}`)
- }
-    
+  
 //redux hooks
 const dispatch = useDispatch()
 
@@ -28,10 +25,17 @@ const dispatch = useDispatch()
 const { loading, error, productDetail} = productDetails
 
 useEffect(() => {
-    dispatch(listProductDetail(match.params.id))
+    if (!productDetail._id || productDetail._id !== match.params.id) {
+        dispatch(listProductDetail(match.params.id))
+    }
+    
 }, [dispatch, match])
 
 
+const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+}
+  
     //displaying the right product
   
 
@@ -100,11 +104,30 @@ useEffect(() => {
 
                    </Row>
                     </ListGroup.Item>
+                   {productDetail.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                          >
+                            {[...Array(productDetail.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
 
-
-                       {/*  button */}
-                   <ListGroup.Item>
-
+                        {/*  button */}
                        <Button 
                        className='btn-block' 
                        type='button'
@@ -113,13 +136,6 @@ useEffect(() => {
                         >
                            Add To Cart
                        </Button>
-
-                      
-                   </ListGroup.Item>
-
-
-
-
                    </ListGroup>
                </Card>
            </Col>
