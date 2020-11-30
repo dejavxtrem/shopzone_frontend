@@ -25,9 +25,8 @@ const dispatch = useDispatch()
 const { loading, error, productDetail} = productDetails
 
 useEffect(() => {
-    if (!productDetail._id || productDetail._id !== match.params.id) {
+   
         dispatch(listProductDetail(match.params.id))
-    }
     
 }, [dispatch, match])
 
