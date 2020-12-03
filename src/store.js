@@ -8,6 +8,9 @@ import { productListReducers ,
 //user login reducer
 import { 
     userLoginReducer,
+    userRegisterReducer,
+    userDetailsReducer,
+    userUpdateProfileReducer
 } from './reducers/userReducers'
 
 //card reducer import
@@ -18,7 +21,11 @@ const reducer = combineReducers({
     productList: productListReducers,
     productDetail: productDetailsReducers,
     cart: cartReducer,
-    userLogin: userLoginReducer
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
+    userDetails: userDetailsReducer,
+    userUpdateProfile:userUpdateProfileReducer
+
 })
 
 //carItem from local storage
@@ -32,7 +39,8 @@ const userInfoFromStorage = localStorage.getItem('userInfo') ?
 
 const initialState = {
   cart: {cartItems: cartItemsFromStorage},
-  userLogin: {userInfo: userInfoFromStorage}  
+  userLogin: {userInfo: userInfoFromStorage} ,
+   
 }
 
 const middleware = [thunk]
