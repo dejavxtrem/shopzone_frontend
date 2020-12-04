@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants'
+import { CART_ADD_ITEM, 
+    CART_REMOVE_ITEM, 
+    CART_SAVE_SHIPPING_ADDRESS,
+    CART_SAVE_PAYMENT_METHOD
+} from '../constants/cartConstants'
 
 
 let baseURL = process.env.REACT_APP_BASEURL
@@ -33,3 +37,22 @@ export const removeFromCart = (id) => (dispatch, getState) => {
         localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
+
+export const saveShippingAddress = (shippingData) => (dispatch) => {
+    dispatch({
+        type: CART_SAVE_SHIPPING_ADDRESS,
+        payload: shippingData
+    })
+
+    localStorage.setItem('shippingAddress', JSON.stringify(shippingData))
+}
+
+
+export const savePaymentMethod = (paymentType) => (dispatch) => {
+    dispatch({
+        type: CART_SAVE_PAYMENT_METHOD,
+        payload: paymentType
+    })
+
+    localStorage.setItem('paymentMethod', JSON.stringify(paymentType))
+}
