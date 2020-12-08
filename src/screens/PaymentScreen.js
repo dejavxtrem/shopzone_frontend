@@ -52,7 +52,7 @@ const PaymentScreen = ({history}) => {
                         >
                             
                         </Form.Check>
-
+{/* 
                         <Form.Check
                             type='radio'
                             label='Stripe'
@@ -63,7 +63,7 @@ const PaymentScreen = ({history}) => {
                         >
                             
                         </Form.Check>
-                    
+                     */}
                     </Col>
                     </Form.Group>
           <Button type='submit' 
