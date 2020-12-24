@@ -10,7 +10,10 @@ import {
     userLoginReducer,
     userRegisterReducer,
     userDetailsReducer,
-    userUpdateProfileReducer
+    userUpdateProfileReducer,
+    userListReducer,
+    userDeleteReducer,
+    userUpdateReducer
 } from './reducers/userReducers'
 
 //card reducer import
@@ -30,12 +33,13 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile:userUpdateProfileReducer,
+    userDelete: userDeleteReducer,
+    userUpdate: userUpdateReducer,
+    userList: userListReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderMyList: orderListReducer
-
-
 })
 
 //carItem from local storage
