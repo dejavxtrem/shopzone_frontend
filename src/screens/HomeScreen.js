@@ -1,15 +1,20 @@
 import React, {useEffect} from 'react'
-import  products from '../products'
 import  {Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import Product from '../components/Product'
 import  { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
+import ProductCarousel from '../components/ProductCarousel'
+import Meta from '../components/Meta'
 
 const HomeScreen = ({ match }) => {
 
     const keyword = match.params.keyword
+
+    const pageNumber = match.params.pageNumber || 1
 
 //redux hooks
  const dispatch = useDispatch()
@@ -17,21 +22,28 @@ const HomeScreen = ({ match }) => {
 //useSelector redux hooks
  const productList = useSelector(state => state.productList)
 //get what part of the state you need in the component
- const { loading , error, products } = productList
+ const { loading , error, products, page , pages } = productList
 
 
 
 useEffect(() => {
-    dispatch(listProducts(keyword))
-}, [dispatch, keyword])
+    dispatch(listProducts(keyword, pageNumber))
+}, [dispatch, keyword, pageNumber])
 
 
 
     return (
         <>
+        < Meta />
+         {!keyword ? 
+         (<ProductCarousel/> ): 
+         <Link to='/' className='btn btn-light'>Go Back</Link>}
+
         <h1>Latest Products</h1> 
     {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : 
-         <Row>
+        ( 
+        <>
+        <Row>
          {products.map((product) => (
                      <Col 
                      key={product._id}
@@ -43,7 +55,13 @@ useEffect(() => {
                      <Product product={product}/>
                      </Col>
     ))}
-        </Row>}  
+        </Row>
+        <Paginate pages={pages} 
+                   page={page}
+                   keyword={keyword ? keyword : ''}
+                   />
+        </>
+        )}  
           
     </>
     )

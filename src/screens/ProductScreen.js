@@ -6,6 +6,7 @@ import  { useDispatch, useSelector } from 'react-redux'
 import { listProductDetail, createProductReview} from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Meta from '../components/Meta'
 
 import { PRODUCT_REVIEW_RESET } from '../constants/productConstants'
 
@@ -68,9 +69,14 @@ const submitHandler = (e) => {
 
     return (
         <>
+       
             <Link className='btn btn-light my-3' to='/'>Go Back</Link>
             {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> : (
             <>
+                 <Meta
+              title={productDetail.name}
+             
+            />
             <Row>
             {/*  Production Image */}
            <Col md={6}>
