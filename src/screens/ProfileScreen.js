@@ -45,7 +45,7 @@ useEffect(() => {
     if (!userInfo) {
         history.push('/login')
     } else {
-        if (!user.name) {
+        if (!user || !user.name || success) {
             dispatch(getUserDetails('profile'))
             dispatch(listMyOrders())
         } else {
@@ -53,7 +53,7 @@ useEffect(() => {
             setEmail(user.email)
         }
     }
-}, [dispatch, history, userInfo, user])
+}, [dispatch, history, userInfo, user, success])
 
 
  const submitHandler = (e) => {
@@ -165,7 +165,7 @@ useEffect(() => {
                                   <td>{order._id}</td>
                                   <td>{order.createdAt.substring(0, 10)}</td>
                                   <td>{order.totalPrice}</td>
-                                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : (
+                                  <td>{order.isPaid ? (order.paidAt.substring(0, 10) ): (
                                       <i className='fas fa-times' style={{color: 'red'}}></i>
                                   )}</td>
 

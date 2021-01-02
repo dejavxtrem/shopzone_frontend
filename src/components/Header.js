@@ -1,8 +1,10 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import  { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 import { logout } from '../actions/userActions'
+import SearchBox from './SearchBox'
 
 
 
@@ -31,8 +33,12 @@ const dispatch = useDispatch()
                
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
 
+                {/* The Search Component logic*/}
+                <Route render={({ history }) => <SearchBox history={history} />} />
+                {/* The Search Component logic*/}
+
+            <Nav className="ml-auto">
             <LinkContainer to='/cart'>
                 <Nav.Link > <i className='fas fa-shopping-cart'></i>Cart </Nav.Link>
             </LinkContainer>

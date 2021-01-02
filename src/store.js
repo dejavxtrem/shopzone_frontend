@@ -6,7 +6,8 @@ import { productListReducers ,
     productDetailsReducers,
     productDeleteReducers,
     productCreateReducers,
-    productUpdateReducers
+    productUpdateReducers,
+    productReviewCreateReducers
 } from './reducers/productReducers'
 //user login reducer
 import { 
@@ -16,7 +17,8 @@ import {
     userUpdateProfileReducer,
     userListReducer,
     userDeleteReducer,
-    userUpdateReducer
+    userUpdateReducer,
+
 } from './reducers/userReducers'
 
 //card reducer import
@@ -24,7 +26,9 @@ import { cartReducer } from './reducers/cartReducers'
 import { orderCreateReducer, 
     orderDetailsReducer, 
     orderPayReducer,
-    orderListReducer
+    orderListMyReducer,
+    orderListReducer,
+    orderDeliveredReducer
 } from './reducers/orderReducers'
 
 
@@ -34,6 +38,7 @@ const reducer = combineReducers({
     productDelete: productDeleteReducers,
     productCreate: productCreateReducers,
     productUpdate: productUpdateReducers,
+    productReviewCreate: productReviewCreateReducers,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
@@ -45,7 +50,9 @@ const reducer = combineReducers({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
-    orderMyList: orderListReducer
+    orderMyList: orderListMyReducer,
+    orderList: orderListReducer,
+    orderDelivered: orderDeliveredReducer
 })
 
 //carItem from local storage

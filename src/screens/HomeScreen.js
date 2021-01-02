@@ -7,7 +7,9 @@ import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+
+    const keyword = match.params.keyword
 
 //redux hooks
  const dispatch = useDispatch()
@@ -20,8 +22,8 @@ const HomeScreen = () => {
 
 
 useEffect(() => {
-    dispatch(listProducts())
-}, [dispatch])
+    dispatch(listProducts(keyword))
+}, [dispatch, keyword])
 
 
 
