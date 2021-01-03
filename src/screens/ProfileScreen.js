@@ -6,6 +6,8 @@ import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile} from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
 import { LinkContainer } from 'react-router-bootstrap'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+
 
 
 const ProfileScreen = ({location, history}) => {
@@ -46,6 +48,7 @@ useEffect(() => {
         history.push('/login')
     } else {
         if (!user || !user.name || success) {
+            dispatch({ type: USER_UPDATE_PROFILE_RESET })
             dispatch(getUserDetails('profile'))
             dispatch(listMyOrders())
         } else {
@@ -160,8 +163,8 @@ useEffect(() => {
                     </thead>
                     <tbody>
                         {
-                          orders.map(order => {
-                             return  <tr key={order._id}>
+                          orders.map((order) => {
+                              <tr key={order._id}>
                                   <td>{order._id}</td>
                                   <td>{order.createdAt.substring(0, 10)}</td>
                                   <td>{order.totalPrice}</td>
@@ -169,7 +172,7 @@ useEffect(() => {
                                       <i className='fas fa-times' style={{color: 'red'}}></i>
                                   )}</td>
 
-                                   <td>{order.isDelivered ? order.isDeliveredAt.substring(0, 10) : (
+                                   <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : (
                                       <i className='fas fa-times' style={{color:'red'}}></i>
                                   )}</td>
 
